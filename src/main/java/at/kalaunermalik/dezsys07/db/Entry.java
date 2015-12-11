@@ -2,8 +2,11 @@ package at.kalaunermalik.dezsys07.db;
 
 
 
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Entry {
@@ -11,10 +14,11 @@ public class Entry {
     @GeneratedValue
     private long id;
 
-    @NotNull
+    @NotEmpty
+    @Size(max = 50)
     private String title;
 
-    @NotNull
+    @Lob
     private String content;
 
     public Entry() {}
