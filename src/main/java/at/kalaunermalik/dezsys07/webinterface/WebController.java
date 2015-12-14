@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ public class WebController {
     private static final String POST_URL = "http://localhost:8080/entries";
     private static final String GET_ENTRY = "http://localhost:8080/entries/{id}";
     private static final String GET_BY_TITLE = "http://localhost:8080/entries/title={title}";
+    private static final String SEARCH = "http://localhost:8080/entries?searchstring={searchstring}";
     private final RestTemplate restTemplate;
 
 
@@ -40,6 +42,22 @@ public class WebController {
         model.addAttribute("entry", result);
         model.addAttribute("resultmessage", "Eintrag erfolgreich erstellt!");
         return "result";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchGet() {
+        return "search";
+    }
+
+    @RequestMapping(value = "/searchsubmit", method = RequestMethod.GET)
+    public String searchPost(@RequestParam String searchstring, Model model) {
+        Map<String, String> params = new HashMap<>();
+        params.put("searchstring", searchstring);
+        Entry[] entries = restTemplate.getForObject(SEARCH, Entry[].class, params);
+        if (entries.length == 0)
+            entries = null;
+        model.addAttribute("entries", entries);
+        return "search_result";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)

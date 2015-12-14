@@ -9,4 +9,5 @@ public interface EntryService {
     List<Entry> getAll();
     List<Entry> getByTitle(String title);
     Entry update(Entry entry);
+    List<Entry> fullTextSearch(String searchStr);
 }

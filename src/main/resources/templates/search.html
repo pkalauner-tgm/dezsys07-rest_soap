@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Eintrag aktualisieren</title>
+    <title>Volltextsuche</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.min.css}" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet" media="screen" />
@@ -10,15 +10,13 @@
 <body>
 <div th:include="navbar :: navbar"></div>
 <div class="container jumbotron" style="background:transparent !important">
-<h1>Eintrag aktualisieren</h1>
-Geben Sie die ID oder den Titel des zu aktualisierenden Eintrags an. Falls Sie beides angeben, wird nur die ID genutzt. <br />
-Achtung: Falls der Titel angegeben ist, wird nur der erste Eintrag mit diesem Titel aktualisiert. <br />
-
-<form id="inputForm" action="update" method="post">
-    <label for="entryid">ID: </label><input type="text" id="entryid" name="entryid" /><br/>
-    <label for="title">Titel: </label><input type="text" id="title" name="title"/><br/>
-    <input type="submit" class="btn btn-primary" value="Weiter"/>
+<h1>Volltextsuche</h1>
+<div class="form-group">
+<form id="inputForm" action="searchsubmit" method="get">
+    <input placeholder="Suchstring" class="form-control" type="text" id="searchstring" name="searchstring" /><br/>
+    <input type="submit" class="btn btn-primary" value="Suchen"/>
 </form>
+</div>
 
 
 <br/><br/>

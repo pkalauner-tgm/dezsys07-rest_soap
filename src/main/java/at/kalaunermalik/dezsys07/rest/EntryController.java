@@ -51,6 +51,10 @@ public class EntryController {
     public ResponseEntity<Entry> getById(@PathVariable("id") long id) {
         return new ResponseEntity<>(entryDao.getById(id), HttpStatus.OK);
     }
+    @RequestMapping(value = "/entries", method = RequestMethod.GET)
+    public ResponseEntity<List<Entry>> search(@RequestParam(value = "searchstring", required = false, defaultValue = "") String searchString) {
+        return new ResponseEntity<>(entryDao.fullTextSearch(searchString), HttpStatus.OK);
+    }
 
     /**
      * Retrieve the Entry with the given title

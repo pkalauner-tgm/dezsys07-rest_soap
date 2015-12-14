@@ -36,6 +36,11 @@ public class EntryDao implements EntryService{
     }
 
     @Override
+    public List<Entry> fullTextSearch(String searchStr) {
+        return repository.findTop100ByTitleContainingOrContentContaining(searchStr, searchStr);
+    }
+
+    @Override
     public Entry update(Entry entry) {
         return repository.save(entry);
     }

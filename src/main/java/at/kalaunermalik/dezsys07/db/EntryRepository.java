@@ -7,4 +7,5 @@ import java.util.List;
 public interface EntryRepository extends CrudRepository<Entry, Long> {
     List<Entry> findAll();
     List<Entry> findByTitle(String title);
+    List<Entry> findTop100ByTitleContainingOrContentContaining(String title, String content);
 }
