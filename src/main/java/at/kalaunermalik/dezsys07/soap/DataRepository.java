@@ -1,24 +1,22 @@
 package at.kalaunermalik.dezsys07.soap;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 import at.kalaunermalik.dezsys07.db.Entry;
 import at.kalaunermalik.dezsys07.db.EntryDao;
-import dezsys07.kalaunermalik.at.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.ParseState;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
+import java.util.List;
 
 @Component
 public class DataRepository {
 
-    //@Autowired
-    //private EntryDao entryDao;
-    private static final List<Data> data = new ArrayList<Data>();
-
+    @Autowired
+    private EntryDao entryDao;
+    //private static final List<Data> data = new ArrayList<Data>();
+    /*
     @PostConstruct
     public void initData() {
         Data d1 = new Data();
@@ -50,14 +48,14 @@ public class DataRepository {
         data.add(d4);
     }
 
+    */
 
 
-
-
-    //public List<Entry> findData(String name) {
-      public Data findData(String name){
+    public List<Entry> findData(String name) {
+        //  public Data findData(String name){
         Assert.notNull(name);
 
+        /**
         Data result = null;
 
         for (Data d : data) {
@@ -67,5 +65,7 @@ public class DataRepository {
         }
 
         return result;
+         */
+        return entryDao.getByTitle(name);
     }
 }

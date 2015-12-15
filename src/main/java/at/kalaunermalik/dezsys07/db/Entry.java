@@ -7,18 +7,25 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement(name = "entry", namespace = "at.kalaunermalik.dezsys07")
+@XmlType(name="entry",namespace = "at.kalaunermalik.dezsys07")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Entry {
     @Id
     @GeneratedValue
+    @XmlElement(required = true)
     private long id;
 
     @NotEmpty
     @Size(max = 50)
+    @XmlElement(required = true)
     private String title;
 
     @Lob
+    @XmlElement
     private String content;
 
     public Entry() {}
