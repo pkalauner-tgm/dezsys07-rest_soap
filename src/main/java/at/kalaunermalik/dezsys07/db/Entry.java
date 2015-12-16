@@ -63,4 +63,8 @@ public class Entry {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String toFormattedString(){
+        return "id: "+this.getId()+"\ntitle: "+this.getTitle()+"\ncontent: "+this.getContent();
+    }
 }
