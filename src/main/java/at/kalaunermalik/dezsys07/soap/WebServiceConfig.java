@@ -12,9 +12,18 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+/**
+ * This class configurates the Webservice. Especially configurations necessary
+ * information for the wsdl-file is set.
+ */
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+    /**
+     * Creates a @see messageDispatcherServlet and sets necessary configurations
+     * @param applicationContext the given applicationContext
+     * @return the ServletRegistrationBean with /ws/* as URL-mapping
+     */
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -23,6 +32,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
+    /**
+     * Creates a configurated wsdldefinition. It sets the namespace port and location of the wsdl with the given dataschema (xsd)
+     * @param dataSchema the xsd of the webservice
+     * @return the configurated wsdldefinition
+     */
     @Bean(name = "data")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema dataSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -33,6 +47,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return wsdl11Definition;
     }
 
+    /**
+     * Creates the xsd-schema from the provided xsd-file
+     * @return the simple xsd-schema generated from the file
+     */
     @Bean
     public XsdSchema dataSchema() {
         return new SimpleXsdSchema(new ClassPathResource("data.xsd"));
