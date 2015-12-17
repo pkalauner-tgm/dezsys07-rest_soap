@@ -59,13 +59,17 @@ task genJaxb {
     }
 }
 
+springBoot {
+    mainClass = "at.kalaunermalik.dezsys07.Application"
+}
+
 configurations {
     jaxb
 }
 
 jar {
-    baseName = 'gs-producing-web-service'
-    version = '0.1.0'
+    baseName = 'Kalauner_Malik_Dezsys07_Server'
+    version = '1.0'
     from genJaxb.classesDir
 }
 
