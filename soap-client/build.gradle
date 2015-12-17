@@ -1,0 +1,48 @@
+// Plugins
+apply plugin: 'java'
+apply plugin: 'application'
+
+// Deploy setting
+def deployName = 'JarName'
+def mainClass = 'ac.at.tgm.test.Main'
+version = '1.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile("wsdl4j:wsdl4j:1.6.1")
+    compile("commons-cli:commons-cli:1.2")
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+    compile("com.sun.xml.bind:jaxb-xjc:2.2.4-1")
+}
+
+// Build Jar
+task buildJar(type: Jar, dependsOn: ['clean', 'javadoc', 'test']) {
+    // jar manifest
+    manifest {
+        attributes 'Implementation-Title': rootProject.name,
+                'Implementation-Version': version,
+                'Main-Class': mainClass
+    }
+    // jar base name
+    baseName = deployName
+    // pack all compile libs
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    // pack all source files
+    from sourceSets.main.allSource
+    // pack javadoc
+    from(javadoc.destinationDir) {
+        into('doc/javadoc')
+    }
+
+}
+
+// clean before compile
+compileJava.mustRunAfter clean
