@@ -5,6 +5,7 @@ apply plugin: 'application'
 // Deploy setting
 def deployName = 'Kalauner_Malik_Dezsys07_Client'
 def mainClass = 'at.kalaunermalik.dezsys07.soaclient.Client'
+mainClassName=mainClass
 version = '1.0'
 
 sourceCompatibility = 1.8
@@ -44,6 +45,7 @@ task buildJar(type: Jar, dependsOn: ['clean', 'javadoc']) {
 
     with jar
 }
+
 
 // clean before compile
 compileJava.mustRunAfter clean
