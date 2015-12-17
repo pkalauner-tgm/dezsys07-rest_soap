@@ -3,8 +3,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 // Deploy setting
-def deployName = 'JarName'
-def mainClass = 'ac.at.tgm.test.Main'
+def deployName = 'Kalauner_Malik_Dezsys07_Client'
+def mainClass = 'at.kalaunermalik.dezsys07.soaclient.Client'
 version = '1.0'
 
 sourceCompatibility = 1.8
@@ -24,7 +24,7 @@ dependencies {
 }
 
 // Build Jar
-task buildJar(type: Jar, dependsOn: ['clean', 'javadoc', 'test']) {
+task buildJar(type: Jar, dependsOn: ['clean', 'javadoc']) {
     // jar manifest
     manifest {
         attributes 'Implementation-Title': rootProject.name,
@@ -42,6 +42,7 @@ task buildJar(type: Jar, dependsOn: ['clean', 'javadoc', 'test']) {
         into('doc/javadoc')
     }
 
+    with jar
 }
 
 // clean before compile
