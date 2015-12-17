@@ -71,6 +71,7 @@ jar {
     baseName = 'Kalauner_Malik_Dezsys07_Server'
     version = '1.0'
     from genJaxb.classesDir
+    from sourceSets.main.allSource
 }
 
 sourceCompatibility = 1.8

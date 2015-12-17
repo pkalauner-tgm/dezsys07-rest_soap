@@ -10,12 +10,18 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class Application {
-    private static final int TEST_DATA_NUMBER = 0;
+    private static int TEST_DATA_NUMBER = 0;
 
     @Autowired
     private EntryDao entryDao;
 
     public static void main(String[] args) {
+        if (args.length > 0) {
+            try {
+                TEST_DATA_NUMBER = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+            }
+        }
         SpringApplication.run(Application.class, args);
     }
 
@@ -23,6 +29,6 @@ public class Application {
     @PostConstruct
     public void insertTestData() {
         for (int i = 1; i <= TEST_DATA_NUMBER; i++)
-            entryDao.create(new Entry("Titel " + i, "Content " + i));
+            entryDao.create(new Entry("Lorem ips " + i, "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut " + i));
     }
 }
