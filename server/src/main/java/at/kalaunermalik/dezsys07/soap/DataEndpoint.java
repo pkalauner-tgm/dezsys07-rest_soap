@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * This class connects the actual methods with their xsd counterparts.
- * It uses the {@see DataRepository} as source and uses both entries {@see dezsys07.kalaunermalik.at.Entry} {@see Entry}
+ * It uses the @see{DataRepository} as source and uses both entries @see{dezsys07.kalaunermalik.at.Entry} @see {Entry}
  */
 @Endpoint
 public class DataEndpoint {

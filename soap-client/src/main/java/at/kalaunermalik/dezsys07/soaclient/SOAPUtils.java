@@ -84,7 +84,7 @@ public class SOAPUtils {
      * Creates an Entry from the given envelope, only works with our implementation.
      *
      * @param response the responsemessage
-     * @return the envelope as {@see Entry}
+     * @return the envelope as @see{Entry}
      */
     public static List<Entry> createEntry(SOAPMessage response) {
         SOAPBody responseBody = null;

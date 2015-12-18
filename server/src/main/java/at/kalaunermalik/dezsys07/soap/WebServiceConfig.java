@@ -20,7 +20,7 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
     /**
-     * Creates a {@see messageDispatcherServlet} and sets necessary configurations
+     * Creates a @see{messageDispatcherServlet} and sets necessary configurations
      * @param applicationContext the given applicationContext
      * @return the ServletRegistrationBean with /ws/* as URL-mapping
      */
