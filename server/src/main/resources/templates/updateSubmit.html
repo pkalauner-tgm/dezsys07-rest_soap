@@ -13,10 +13,9 @@
 <h1>Eintrag aktualisieren</h1>
 
 <form id="inputForm" th:action="@{/updateSubmit}" th:object="${entry}" method="post">
-    <label for="id">ID: </label><input type="text" id="id" th:value="${entry.id}" th:field="*{id}" th:readonly="true"/> <br />
-    <label for="title">Titel: </label><input type="text" id="title" th:value="${entry.title}" th:field="*{title}"/><br/>
-    Content: <br />
-    <textarea id="content" cols="50" rows="20" th:value="${entry.content}" th:field="*{content}"></textarea><br />
+    <input placeholder="ID" class="form-control" type="text" id="id" th:value="${entry.id}" th:field="*{id}" th:readonly="true"/> <br />
+    <input placeholder="Titel" class="form-control" type="text" id="title" th:value="${entry.title}" th:field="*{title}"/><br/>
+    <textarea placeholder="Content  " class="form-control" id="content" cols="50" rows="20" th:value="${entry.content}" th:field="*{content}"></textarea><br />
     <input type="submit" class="btn btn-primary" value="Ok"/>
 </form>
 

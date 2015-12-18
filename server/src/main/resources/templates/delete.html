@@ -12,11 +12,11 @@
 <div class="container jumbotron" style="background:transparent !important">
 <h1>Eintrag entfernen</h1>
 Geben Sie die ID oder den Titel des einzuf&uuml;genden Eintrags an. Falls Sie beides angeben, wird nur die ID genutzt. <br />
-Achtung: Falls der Titel angegeben ist, werden ALLE Eintr&auml;ge mit diesem Titel entfernt! <br />
+Achtung: Falls der Titel angegeben ist, werden ALLE Eintr&auml;ge mit diesem Titel entfernt! <hr />
 
 <form id="inputForm" action="delete" method="post">
-    <label for="entryid">ID: </label><input type="text" id="entryid" name="entryid" /><br/>
-    <label for="title">Titel: </label><input type="text" id="title" name="title"/><br/>
+    <input placeholder="ID" class="form-control" type="text" id="entryid" name="entryid" /><br/>
+    <input placeholder="Titel" class="form-control" type="text" id="title" name="title"/><br/>
     <input type="submit" class="btn btn-primary" value="Entfernen"/>
 </form>
 

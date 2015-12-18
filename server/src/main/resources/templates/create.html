@@ -13,9 +13,8 @@
 <h1>Eintrag hinzuf&uuml;gen</h1>
 
 <form id="inputForm" th:action="@{/create}" th:object="${entry}" method="post">
-    <label for="title">Titel: </label><input type="text" id="title" th:field="*{title}"/><br/>
-    <b>Content:</b> <br />
-    <textarea id="content" cols="50" rows="20" th:field="*{content}"></textarea><br />
+    <input placeholder="Titel" class="form-control" type="text" id="title" th:field="*{title}"/><br/>
+    <textarea placeholder="Content" class="form-control" id="content" cols="50" rows="20" th:field="*{content}"></textarea><br />
     <input type="submit" class="btn btn-primary" value="Ok"/>
 </form>
 
