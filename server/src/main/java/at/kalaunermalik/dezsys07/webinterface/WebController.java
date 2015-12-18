@@ -12,6 +12,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class handles the HTTP-Requests to the Webapplication.
+ *
+ * @author Paul Kalauner 5BHIT
+ * @version 20151218.1
+ */
 @Controller
 public class WebController {
     private static final String POST_URL = "http://localhost:8080/entries";
@@ -21,21 +27,42 @@ public class WebController {
     private final RestTemplate restTemplate;
 
 
+    /**
+     * Default-Constructor
+     */
     public WebController() {
         this.restTemplate = new RestTemplate();
     }
 
+    /**
+     * Mapping for index page
+     *
+     * @return template name
+     */
     @RequestMapping("/")
     public String index() {
         return "index";
     }
 
+    /**
+     * Mapping for create page
+     *
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createGet(Model model) {
         model.addAttribute("entry", new Entry());
         return "create";
     }
 
+    /**
+     * Mapping for create submit
+     *
+     * @param entry the entry which should be created
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute Entry entry, Model model) {
         Entry result = restTemplate.postForObject(POST_URL, entry, Entry.class);
@@ -44,11 +71,23 @@ public class WebController {
         return "result";
     }
 
+    /**
+     * Mapping for search page
+     *
+     * @return template name
+     */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchGet() {
         return "search";
     }
 
+    /**
+     * Mapping for search submit
+     *
+     * @param searchstring searchstring
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/searchsubmit", method = RequestMethod.GET)
     public String searchPost(@RequestParam String searchstring, Model model) {
         Map<String, String> params = new HashMap<>();
@@ -60,11 +99,24 @@ public class WebController {
         return "search_result";
     }
 
+    /**
+     * Mapping for update page
+     *
+     * @return template name
+     */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateGet() {
         return "update";
     }
 
+    /**
+     * Mapping for update submit
+     *
+     * @param id id of the entry or
+     * @param title title of the entry
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updatePost(@RequestParam(value = "entryid", required = false, defaultValue = "") String id, @RequestParam(value = "title", required = false, defaultValue = "") String title, Model model) {
         Map<String, String> params = new HashMap<>();
@@ -82,6 +134,13 @@ public class WebController {
         return "result_special";
     }
 
+    /**
+     * Mapping for update submit (GET)
+     *
+     * @param id the id of the entry
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/updateSubmit", method = RequestMethod.GET)
     public String updateSubmitGet(@RequestParam(value = "id", required = true) String id, Model model) {
         Map<String, String> params = new HashMap<>();
@@ -96,6 +155,13 @@ public class WebController {
     }
 
 
+    /**
+     * Mapping for update submit (POST)
+     *
+     * @param entry the entry which should be updated
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/updateSubmit", method = RequestMethod.POST)
     public String updateSubmitPost(@ModelAttribute Entry entry, Model model) {
         Map<String, String> params = new HashMap<>();
@@ -108,12 +174,25 @@ public class WebController {
         return "result";
     }
 
+    /**
+     * Mapping for delete page
+     *
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteGet(Model model) {
         model.addAttribute("entry", new Entry());
         return "delete";
     }
 
+    /**
+     * Mapping for delete submit
+     * @param id id of the entry or
+     * @param title title of the entry
+     * @param model model
+     * @return template name
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deletePost(@RequestParam(value = "entryid", required = false, defaultValue = "") String id, @RequestParam(value = "title", required = false, defaultValue = "") String title, Model model) {
         Map<String, String> params = new HashMap<>();
@@ -146,6 +225,12 @@ public class WebController {
         return "result_special";
     }
 
+    /**
+     * ErrorHandler for HttpClientErrorException
+     *
+     * @param model model
+     * @return template name
+     */
     @ExceptionHandler(HttpClientErrorException.class)
     public String httpClientErrorException(Model model) {
         model.addAttribute("errormessage", "HttpClientErrorException. Eventuell sind keine Elemente mit dem angegebenen Merkmal vorhanden.");

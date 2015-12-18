@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/**
+ * This controller manages the REST-Calls
+ *
+ * @author Paul Kalauner 5BHIT
+ * @version 20151218.1
+ */
 @RestController
 public class EntryController {
     @Autowired
@@ -18,7 +25,7 @@ public class EntryController {
     /**
      * Create a new entry
      *
-     * @param entry
+     * @param entry entry object
      * @return String
      */
     @RequestMapping(value = "/entries", method = RequestMethod.POST)
@@ -29,7 +36,7 @@ public class EntryController {
     /**
      * Delete the entry with the passed id
      *
-     * @param id
+     * @param id id of the entry
      * @return String
      */
     @RequestMapping(value = "/entries/{id}", method = RequestMethod.DELETE)
@@ -44,13 +51,20 @@ public class EntryController {
     /**
      * Retrieve the Entry with the given id
      *
-     * @param id
-     * @return Entry
+     * @param id id of the entry
+     * @return Entry with the given
      */
     @RequestMapping(value = "/entries/{id}", method = RequestMethod.GET)
     public ResponseEntity<Entry> getById(@PathVariable("id") long id) {
         return new ResponseEntity<>(entryDao.getById(id), HttpStatus.OK);
     }
+
+    /**
+     * Retreive a list of entries with the containing searchstring in the title or content
+     *
+     * @param searchString searchString
+     * @return List with the matching entries
+     */
     @RequestMapping(value = "/entries", method = RequestMethod.GET)
     public ResponseEntity<List<Entry>> search(@RequestParam(value = "searchstring", required = false, defaultValue = "") String searchString) {
         return new ResponseEntity<>(entryDao.fullTextSearch(searchString), HttpStatus.OK);
@@ -59,8 +73,8 @@ public class EntryController {
     /**
      * Retrieve the Entry with the given title
      *
-     * @param title
-     * @return Entry
+     * @param title entry title
+     * @return List with the entries with the given title
      */
     @RequestMapping(value = "/entries/title={title}", method = RequestMethod.GET)
     public ResponseEntity<List<Entry>> getByTitle(@PathVariable("title") String title) {
@@ -73,9 +87,9 @@ public class EntryController {
     /**
      * Update the title and the content for the entry identified by the passed id
      *
-     * @param id
-     * @param newEntry
-     * @return Entry
+     * @param id id of the entry which should be updated
+     * @param newEntry newEntry
+     * @return Entry updated Entry
      */
     @RequestMapping(value = "/entries/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Entry> updateName(@PathVariable("id") long id, @RequestBody Entry newEntry) {

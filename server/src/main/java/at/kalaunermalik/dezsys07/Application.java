@@ -8,6 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Entry point of the Spring Application
+ *
+ * @author Paul Kalauner 5BHIT
+ * @version 20151218.1
+ */
 @SpringBootApplication
 public class Application {
     private static int TEST_DATA_NUMBER = 0;
@@ -15,6 +21,12 @@ public class Application {
     @Autowired
     private EntryDao entryDao;
 
+    /**
+     * Main-Method
+     *
+     * @param args The main method takes one argument with the number of test data entries which should be inserted.
+     *             If no argument is present, no entries will be inserted.
+     */
     public static void main(String[] args) {
         if (args.length > 0) {
             try {
@@ -26,6 +38,9 @@ public class Application {
     }
 
 
+    /**
+     * Methods which inserts TestData
+     */
     @PostConstruct
     public void insertTestData() {
         for (int i = 1; i <= TEST_DATA_NUMBER; i++)
