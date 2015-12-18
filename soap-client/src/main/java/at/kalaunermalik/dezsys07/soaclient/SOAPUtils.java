@@ -11,11 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by patrick on 16.12.2015.
+ * This class provides a SearchRequest and an Envelope to Entry mapping.
  */
 public class SOAPUtils {
     private static final Logger logger = LogManager.getLogger(SOAPUtils.class.getName());
 
+    /**
+     * Creates a SearchRequest, using the given String as searchstring with the defined envelope.
+     *
+     * @param search The searchstring
+     * @return the SOAPMessage with the SearchRequest with the given searchstring
+     */
     public static SOAPMessage createSearchRequest(String search) {
         SOAPMessage message = null;
         try {
@@ -74,6 +80,12 @@ public class SOAPUtils {
         return message;
     }
 
+    /**
+     * Creates an Entry from the given envelope, only works with our implementation.
+     *
+     * @param response the responsemessage
+     * @return the envelope as {@see Entry}
+     */
     public static List<Entry> createEntry(SOAPMessage response) {
         SOAPBody responseBody = null;
         List<Entry> retEntries = new ArrayList<>(1);
